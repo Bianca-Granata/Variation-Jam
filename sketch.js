@@ -20,22 +20,15 @@
 
 
 //creates the canvas
+let columns; let rows;
+let size = 20;
+let boardArray = [columns, rows];
+
 function setup() {
   createCanvas(640, 480);
 }
 //adding all the pieces together
 function draw() {
-  background("#000000");
-  drawBoard();
-}
-//creating using functions 
-function drawBoard(x, y, size) {
-  push();
-  stroke();
-  square();
-  color();
-
-
-
+  background();
 }
 
