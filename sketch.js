@@ -35,13 +35,13 @@ let foods = [
   {
     x: 500,
     y: 300,
-    size: 14,
+    size: 40,
     buzziness: 4
   },
   {
     x: 180,
     y: 50,
-    size: 30,
+    size: 25,
     buzziness: 20
   }
 ];
@@ -190,6 +190,10 @@ function keyPressed() {
   } else if (keyCode == DOWN_ARROW) {
     movement = createVector(0, 1);
   }
+}
+function resetFood() {
+  fly.x = 0;
+  fly.y = random(0, 300);
 }
 //making the snake EAT IT'S FOOD.
 function checkSnakeHeadFoodOverlap() {
