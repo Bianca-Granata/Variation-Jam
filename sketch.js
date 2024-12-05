@@ -21,15 +21,39 @@
 
 const numStars = 100;
 
+/*let foods = [
+  {
+    x: 100,
+    y: 125,
+    size: 10,
+    buzziness: 2
+  },
+  {
+    x: 160,
+    y: 170,
+    size: 14,
+    buzziness: 4
+  },
+  {
+    x: 180,
+    y: 50,
+    size: 30,
+    buzziness: 20
+  }
+]; */
+
 //declaring the vars for the grid
 let columns; let rows;
 let size = 20; //change this later to 20
-let grid = [];//let gridArray = [columns, rows];
+let grid = [];//var for the grid
+//the food
+//let food;
 
 //creates the canvas
 function setup() {
   createCanvas(640, 580);
-  //the creates the grid for the snake
+
+  //the creates the hidden background grid for the snake
   rows = height / size;
   columns = width / size;
   //creates the array
@@ -39,22 +63,52 @@ function setup() {
       grid[c][r] = 0;
     }
   }
-  food = createVector(0, 0);
 }
+
+/*function createFood() {
+  //generate a random food
+  let food = {
+    x: random(0, width),
+    y: random(0, height),
+    size: random(2, 10),
+    buzziness: random(2, 8)
+  };
+  return food;
+} */
+
 //adding all the pieces together
 function draw() {
   background(0);
   drawGrid();
+  /* for (let food of foods) {
+     //moveFood(food);
+     drawFood(food);
+   }*/
+
 
   //added fro the for-loop code 
-  //randomSeed(1);
   for (let i = 0; i < numStars; i++) {
     drawStar();
   }
   //location of the food
-  grid[food.x][food.y] = -1;
+  //grid[food.x][food.y] = -1;
 }
 
+
+/*function moveFood(food) {
+  food.x += random(-food.buzziness, food.buzziness);
+  food.y += random(-food.buzziness, food.buzziness);
+}
+
+function drawFood(food) {
+  push();
+  noStroke();
+  fill(255, 0, 68);
+  ellipse(food.x, food.y, food.size);
+  pop();
+}
+*/
+//the stars...or maybe snow??? no. they are stars
 function drawStar() {
   const x = random(0, width);
   const y = random(0, height);
@@ -79,3 +133,9 @@ function drawGrid() {
     }
   }
 }
+
+/*function keyPressed() {
+  //the food starts to move
+  const food = moveFood();
+  foods.push(moveFood);
+}*/
