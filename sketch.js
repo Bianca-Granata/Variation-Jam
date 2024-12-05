@@ -8,10 +8,9 @@
  * variation 1
  * The "food" in which the snake has to eat moves, therefore the snake has to catch it
  * 
- * variation 2 
- * snake game but by clicking the mouse, it generates more food 
+ * variation 2
+ * snake game but by clicking the mouse, it allows to generates more food 
  * 
- * variation 3
  * 
  * 
  * Made with p5
@@ -23,6 +22,8 @@
 
 const numStars = 100;
 
+//creating the scoreboard
+var scoreboard = 0;
 
 let foods = [
   {
@@ -89,6 +90,11 @@ function draw() {
   background(0);
   drawGrid();
   removeTail();
+  textSize(15);
+  text(scoreboard, 350, 40);
+
+  checkSnakeHeadFoodOverlap();//making sure the snake eats
+
   snakeHead.add(movement);
   grid[snakeHead.x][snakeHead.y] = 1;
   //adding the game over
@@ -183,5 +189,19 @@ function keyPressed() {
     movement = createVector(0, -1);
   } else if (keyCode == DOWN_ARROW) {
     movement = createVector(0, 1);
+  }
+}
+//making the snake EAT IT'S FOOD.
+function checkSnakeHeadFoodOverlap() {
+  // Get distance from snake to the food/ pink circles
+  const d = dist(snakeHead.x, snakeHead.y, foods.x, foods.y);
+  // Check if it's an overlap
+  // Check if it's an overlap
+  const eaten = (d < snakeHead.size / 2 + foods.size / 2);
+  if (eaten) {
+    //each time the snake eats a point is added to the scoreboard
+    scoreboard = scoreboard + 1;
+    // Reset the food
+    resetFood();
   }
 }
