@@ -9,7 +9,7 @@
  * The "food" in which the snake has to eat moves, therefore the snake has to catch it
  * 
  * variation 2 
- * snake game but reverse, the snake has to avoid being "caught" by the food
+ * snake game but by clicking the mouse, it generates more food 
  * 
  * variation 3
  * 
@@ -52,6 +52,7 @@ let grid = [];//var for the grid
 let snakeHead; //the snake's head
 let movement; //the snake's movement
 let gameOver;
+let lenght;
 //creates the canvas
 function setup() {
   createCanvas(640, 580);
@@ -86,9 +87,10 @@ function createFood() {
 //adding all the pieces together
 function draw() {
   background(0);
-  end();
   drawGrid();
-  //grid[food.x][food.y] = 1;
+  removeTail();
+  snakeHead.add(movement);
+  grid[snakeHead.x][snakeHead.y] = 1;
   //adding the game over
   if (gameOver == false) {
     grid[snakeHead.x][snakeHead.y] = 1;
@@ -98,17 +100,6 @@ function draw() {
     moveFood(food);
     drawFood(food);
   }
-  //update when the game over would be true
-  function end() {
-    snakeHead.add(movement);
-    if (snakeHead.x < 0 || snakeHead.x > columns - 1 || snakeHead.y < 0 ||
-      snakeHead.y > rows - 1) {
-      gameOver = true;
-      print("Game Over");
-    }
-  }
-
-
 
   //added fro the for-loop code 
   for (let i = 0; i < numStars; i++) {
@@ -130,6 +121,16 @@ function drawFood(food) {
   fill(255, 0, 68);
   ellipse(food.x, food.y, food.size);
   pop();
+}
+//to remove the tail of the snake when it moves
+function removeTail() {
+  for (let c = 0; c < columns; c++) {
+    for (let r = 0; r < rows; r++) {
+      if (grid[c][r] > 0) {
+        grid[c][r] -= 1;
+      }
+    }
+  }
 }
 //attempt at making the snake move
 function drawSnake() {
