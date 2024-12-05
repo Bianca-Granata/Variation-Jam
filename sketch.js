@@ -50,7 +50,7 @@ let foods = [
 let columns; let rows;
 let size = 20; //change this later to 20
 let grid = [];//var for the grid
-let snakeHead; //the snake's head
+let snake; //the snake's head
 let movement; //the snake's movement
 let gameOver;
 let lenght;
@@ -69,7 +69,7 @@ function setup() {
     }
   }
   //this part I referenced  the youtube videos 
-  snakeHead = createVector(int(random(0, columns)),
+  snake = createVector(int(random(0, columns)),
     int(random(0, rows)));
   movement = createVector(0, 0);
 }
@@ -90,16 +90,16 @@ function draw() {
   background(0);
   drawGrid();
   removeTail();
-  textSize(15);
+  textSize(20);
   text(scoreboard, 350, 40);
 
-  checkSnakeHeadFoodOverlap();//making sure the snake eats
+  checkSnakeFoodOverlap();//making sure the snake eats
 
-  snakeHead.add(movement);
-  grid[snakeHead.x][snakeHead.y] = 1;
+  snake.add(movement);
+  grid[snake.x][snake.y] = 1;
   //adding the game over
   if (gameOver == false) {
-    grid[snakeHead.x][snakeHead.y] = 1;
+    grid[snake.x][snake.y] = 1;
   }
   //drawSnake();
   for (let food of foods) {
@@ -196,12 +196,12 @@ function resetFood() {
   fly.y = random(0, 300);
 }
 //making the snake EAT IT'S FOOD.
-function checkSnakeHeadFoodOverlap() {
+function checkSnakeFoodOverlap() {
   // Get distance from snake to the food/ pink circles
-  const d = dist(snakeHead.x, snakeHead.y, foods.x, foods.y);
+  const d = dist(snake.x, snake.y, foods.x, foods.y);
   // Check if it's an overlap
   // Check if it's an overlap
-  const eaten = (d < snakeHead.size / 2 + foods.size / 2);
+  const eaten = (d < snake / 2 + foods / 2);
   if (eaten) {
     //each time the snake eats a point is added to the scoreboard
     scoreboard = scoreboard + 1;
